@@ -51,7 +51,7 @@ public class HomeController {
     TestimonialService testimonialService;
 
     @GetMapping
-    public String index(){
+    public String index() {
         return "Hello World!";
     }
 
@@ -59,12 +59,12 @@ public class HomeController {
     public List<About> getAbout() {
         return aboutService.findAll();
     }
-    
+
     @GetMapping("/api/contact")
     public List<Contact> getContact() {
         return contactService.findAll();
     }
-    
+
     @GetMapping("/api/feature")
     public List<Feature> getFeature() {
         return featureService.findAll();
@@ -89,10 +89,10 @@ public class HomeController {
     public List<Team> getTeam() {
         return teamService.findAll();
     }
-    
+
     @GetMapping("/api/testimonial")
     public List<Testimonial> getTestimonial() {
         return testimonialService.findAll();
     }
-    
+
 }

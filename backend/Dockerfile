@@ -15,25 +15,21 @@ COPY pom.xml .
 # This is a separate step so the dependencies will be cached unless 
 # the pom.xml file has changed.
 RUN chmod +x mvnw
-RUN ./mvnw dependency:go-offline -B
+# RUN ./mvnw dependency:go-offline -B
 
 # Copy the project source
 COPY src src
 
 # Package the application
 RUN ./mvnw package -DskipTests
-RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.war)
+# RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 #### Stage 2: A minimal docker image with command to run the app 
 FROM openjdk:11-jre-slim
 
-ARG DEPENDENCY=/app/target/dependency
+# Copy compiled app to container
+COPY --from=build /app/target/SampleApp-Backend.jar .
 
-# Copy project dependencies from the build stage
-COPY --from=build ${DEPENDENCY}/WEB-INF/lib /app/lib
-COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
-COPY --from=build ${DEPENDENCY}/WEB-INF/classes /app
+EXPOSE 8081
 
-# EXPOSE 8081
-
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.musaugurlu.backend.BackendApplication"]
+ENTRYPOINT ["java","-jar","SampleApp-Backend.jar"]

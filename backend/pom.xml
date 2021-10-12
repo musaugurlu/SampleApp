@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.musaugurlu</groupId>
+	<name>backend</name>
 	<artifactId>backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>backend</name>
-	<description>Demo project for Spring Boot</description>
+	<description>SampleApp Backend</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -44,6 +44,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>SampleApp-Backend</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
